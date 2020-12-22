@@ -24,9 +24,9 @@ type Resource struct {
 func main() {
 	tag_name := flag.String("tag-name", "", "Tag to search")
 	tag_value := flag.String("tag-value", "", "Tag to search")
-	region := flag.String("region", "us-east-1", "region to search inventory; default: us-east-1")
-	resource_type := flag.String("resource", "", "Resource type; ex: ec2, s3, acm")
-	output_format := flag.String("output", "default", "Resource type; ex: default, arn, csv")
+	region := flag.String("region", "us-east-1", "Region to search inventory; default: us-east-1")
+	resource_type := flag.String("resource", "", "Optional resource type; ex: ec2, s3, acm")
+	output_format := flag.String("output", "default", "Output report type; ex: default, arn, csv")
 	flag.Parse()
 
 	resources := getResources(*tag_name, *tag_value, *region, *resource_type)
