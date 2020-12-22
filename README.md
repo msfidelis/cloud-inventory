@@ -25,14 +25,14 @@
 ### MacOS / OSX
 
 ```bash
-wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.3/cloud-inventory_0.0.2_darwin_amd64 -O /usr/local/bin/cloud-inventory
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.3/cloud-inventory_0.0.3_darwin_amd64 -O /usr/local/bin/cloud-inventory
 chmod +x /usr/local/bin/cloud-inventory
 ```
 
 ### Linux 
 
 ```bash
-wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.3/cloud-inventory_0.0.2_linux_amd64 -O /usr/local/bin/cloud-inventory
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.3/cloud-inventory_0.0.3_linux_amd64 -O /usr/local/bin/cloud-inventory
 chmod +x /usr/local/bin/cloud-inventory
 ```
 
