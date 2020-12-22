@@ -10,9 +10,12 @@
   <a href="https://twitter.com/fidelissauro" target="_blank">
     <img alt="Twitter: fidelissauro" src="https://img.shields.io/twitter/follow/fidelissauro.svg?style=social" />
   </a>
-  <a href="https://github.com/actions/hello-world/workflows/Greet%20Everyone/badge.svg" target="_blank">
-    <img alt="Workflow" src="https://github.com/actions/hello-world/workflows/Greet%20Everyone/badge.svg" />
+  <a href="/" target="_blank">
+    <img alt="Build CI" src="https://github.com/msfidelis/cloud-inventory/workflows/cloud-inventory%20ci/badge.svg" />
   </a>  
+  <a href="/" target="_blank">
+    <img alt="Release" src="https://github.com/msfidelis/cloud-inventory/workflows/release%20packages/badge.svg" />
+  </a>
 </p>
 
 > Simple tool to search tagged resources around all AWS Account
