@@ -56,14 +56,38 @@ cloud-inventory -h
 ## Searching for a tag
 
 ```sh
-cloud-inventory --tag-name Project --tag-value CarsAndBus
+cloud-inventory --tag-name Project --tag-value k8s-with-cri-o
+Searching for resources using Tag Project:k8s-with-cri-o
+Tag:Name                          ARN                                                                     Region
+k8s-node-3                        arn:aws:ec2:us-east-1:181560427716:instance/i-08658a0eca5db90ae         us-east-1
+k8s-master                        arn:aws:ec2:us-east-1:181560427716:instance/i-09471d9233d5eaf8b         us-east-1
+k8s-with-cri-o-kubernetes-sg      arn:aws:ec2:us-east-1:181560427716:security-group/sg-0354149cb0868e23f  us-east-1
+k8s-with-cri-o-public-us-east-1a  arn:aws:ec2:us-east-1:181560427716:subnet/subnet-07e7fab89a7f38e77      us-east-1
+k8s-with-cri-o-vpc                arn:aws:ec2:us-east-1:181560427716:vpc/vpc-068939c361da4db98            us-east-1
+k8s-node-2                        arn:aws:ec2:us-east-1:181560427716:instance/i-08064cc28841d1e06         us-east-1
+k8s-node-1                        arn:aws:ec2:us-east-1:181560427716:instance/i-01640c6de2121a8f4         us-east-1
+k8s-node-0                        arn:aws:ec2:us-east-1:181560427716:instance/i-0634e8bd2de7e2615         us-east-1
+-                                 arn:aws:ec2:us-east-1:181560427716:key-pair/key-054c61aaddb4cbb9c       us-east-1
+k8s-with-cri-o-public-us-east-1b  arn:aws:ec2:us-east-1:181560427716:subnet/subnet-04c9e8e42473dd2b9      us-east-1
+
+Found 10 resources
 ```
 
 
 ## Searching for a tag on a specific AWS service
 
 ```sh
-cloud-inventory --tag-name Project --tag-value CarsAndBus --resource rds
+cloud-inventory --tag-name Project --tag-value k8s-with-cri-o --resource ec2
+Searching for resources using Tag Project:k8s-with-cri-o
+Tag:Name                          ARN                                                                     Region
+k8s-node-1                        arn:aws:ec2:us-east-1:181560427716:instance/i-01640c6de2121a8f4         us-east-1
+-                                 arn:aws:ec2:us-east-1:181560427716:key-pair/key-054c61aaddb4cbb9c       us-east-1
+k8s-node-2                        arn:aws:ec2:us-east-1:181560427716:instance/i-08064cc28841d1e06         us-east-1
+k8s-node-0                        arn:aws:ec2:us-east-1:181560427716:instance/i-0634e8bd2de7e2615         us-east-1
+k8s-master                        arn:aws:ec2:us-east-1:181560427716:instance/i-09471d9233d5eaf8b         us-east-1
+k8s-node-3                        arn:aws:ec2:us-east-1:181560427716:instance/i-08658a0eca5db90ae         us-east-1
+
+Found 6 resources
 ```
 
 ## Customize output format 
@@ -72,6 +96,9 @@ cloud-inventory --tag-name Project --tag-value CarsAndBus --resource rds
 cloud-inventory --tag-name Project --tag-value CarsAndBus --resource rds --output csv
 
 Searching for resources using Tag Project:CarsAndBus
+
+Found 6 resources
+
 Output file: results.csv
 ```
 
