@@ -4,7 +4,7 @@ release:
 builds:
   - binary: cloud-inventory
     env:
-      - CGO_ENABLED=0
+      - TOP=0
     goos:
       - windows
       - darwin
