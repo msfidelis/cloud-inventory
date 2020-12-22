@@ -34,6 +34,9 @@ func main() {
 	output := createOutput(resources, *output_format)
 
 	fmt.Println(output)
+
+	fmt.Printf("\nFound %v resources\n", len(resources))
+
 }
 
 func getResources(tag_key string, tag_value string, region string, resource_type string) map[string]Resource {
