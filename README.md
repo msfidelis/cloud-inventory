@@ -10,9 +10,28 @@
   <a href="https://twitter.com/fidelissauro" target="_blank">
     <img alt="Twitter: fidelissauro" src="https://img.shields.io/twitter/follow/fidelissauro.svg?style=social" />
   </a>
+  <a href="https://github.com/actions/hello-world/workflows/Greet%20Everyone/badge.svg" target="_blank">
+    <img alt="Workflow" src="https://github.com/actions/hello-world/workflows/Greet%20Everyone/badge.svg" />
+  </a>  
 </p>
 
 > Simple tool to search tagged resources around all AWS Account
+
+## Installation
+
+### MacOS / OSX
+
+```bash
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.2/cloud-inventory_0.0.2_darwin_amd64 -O -O /usr/local/bin/cloud-inventory
+chmod +x /usr/local/bin/cloud-inventory
+```
+
+### Linux 
+
+```bash
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.2/cloud-inventory_0.0.2_linux_amd64 -O -O /usr/local/bin/cloud-inventory
+chmod +x /usr/local/bin/cloud-inventory
+```
 
 ## Usage
 
