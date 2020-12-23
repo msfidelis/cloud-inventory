@@ -11,14 +11,16 @@ import (
 	"encoding/csv"
 
 	"github.com/aws/aws-sdk-go/aws"
+	"github.com/aws/aws-sdk-go/aws/arn"
 	"github.com/aws/aws-sdk-go/aws/session"
 	"github.com/aws/aws-sdk-go/service/resourcegroupstaggingapi"
 )
 
 type Resource struct {
-	Name   string
-	Arn    string
-	Region string
+	Name    string
+	Arn     string
+	Region  string
+	Service string
 }
 
 func main() {
@@ -82,12 +84,15 @@ func getResources(tag_key string, tag_value string, region string, resource_type
 		for _, resource := range resources.ResourceTagMappingList {
 
 			name := findNameTag(resource.Tags)
-			arn := *resource.ResourceARN
+			arnLong := *resource.ResourceARN
 
-			cloud_resources[arn] = Resource{
-				Name:   name,
-				Arn:    arn,
-				Region: region,
+			arnInfos, _ := arn.Parse(arnLong)
+
+			cloud_resources[arnLong] = Resource{
+				Name:    name,
+				Arn:     arnLong,
+				Region:  region,
+				Service: arnInfos.Service,
 			}
 
 		}
@@ -146,11 +151,11 @@ func createOutput(items map[string]Resource, format string) string {
 func createDefaultOutput(items map[string]Resource) string {
 
 	output := []string{
-		"Tag:Name | ARN | Region",
+		"Tag:Name | ARN | Region | Service",
 	}
 
 	for _, item := range items {
-		output = append(output, fmt.Sprintf("%s | %s | %s", item.Name, item.Arn, item.Region))
+		output = append(output, fmt.Sprintf("%s | %s | %s | %s", item.Name, item.Arn, item.Region, item.Service))
 	}
 
 	result := columnize.SimpleFormat(output)
@@ -190,6 +195,7 @@ func createCsvOutput(items map[string]Resource) string {
 		output = append(output, item.Name)
 		output = append(output, item.Arn)
 		output = append(output, item.Region)
+		output = append(output, item.Service)
 
 		data = append(data, output)
 	}
