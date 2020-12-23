@@ -1,6 +1,6 @@
 <h1 align="left">Welcome to Cloud Inventory Tags 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.0.0-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.0.4-blue.svg?cacheSeconds=2592000" />
   <a href="README.md" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
