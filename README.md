@@ -144,6 +144,11 @@ Output file: results.csv
 docker run -it fidelissauro/cloud-inventory:latest --tag-name Project --tag-value CarsAndBus
 ```
 
+## Run linter
+
+```sh
+golint -set_exit_status
+```
 
 ## Run tests
 
