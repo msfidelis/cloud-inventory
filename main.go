@@ -43,7 +43,7 @@ func main() {
 
 func getResources(tag_key string, tag_value string, region string, resource_type string) map[string]Resource {
 
-	fmt.Printf("Searching for resources using Tag %v:%v\n", tag_key, tag_value)
+	fmt.Printf("\nSearching for resources using Tag %v:%v\n\n", tag_key, tag_value)
 
 	cloud_resources := make(map[string]Resource)
 	items := int64(100)
