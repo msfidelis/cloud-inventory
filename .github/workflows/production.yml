@@ -16,10 +16,19 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
+      - name: setup GOPATH into PATH
+        run: |
+          echo "::set-env name=GOPATH::$(go env GOPATH)"
+          echo "::add-path::$(go env GOPATH)/bin"
+        shell: bash          
+
       - uses: actions/checkout@v2
 
       - name: Golint Install 
-        run:  go get -u golang.org/x/lint/golint && bash && golint
+        run:  go get -u golang.org/x/lint/golint 
+
+      - name: Run's Golint 
+        run:  golint
 
       - name: Install dependencies
         run: go get -u 
