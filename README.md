@@ -1,6 +1,6 @@
 <h1 align="left">Welcome to Cloud Inventory Tags 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.0.4-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.0.5-blue.svg?cacheSeconds=2592000" />
   <a href="README.md" target="_blank">
     <img alt="Documentation" src="https://img.shields.io/badge/documentation-yes-brightgreen.svg" />
   </a>
@@ -25,14 +25,14 @@
 ### MacOS / OSX
 
 ```bash
-wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.4/cloud-inventory_0.0.4_darwin_amd64 -O /usr/local/bin/cloud-inventory
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.5/cloud-inventory_0.0.5_darwin_amd64 -O /usr/local/bin/cloud-inventory
 chmod +x /usr/local/bin/cloud-inventory
 ```
 
 ### Linux 
 
 ```bash
-wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.4/cloud-inventory_0.0.4_linux_amd64 -O /usr/local/bin/cloud-inventory
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.5/cloud-inventory_0.0.5_linux_amd64 -O /usr/local/bin/cloud-inventory
 chmod +x /usr/local/bin/cloud-inventory
 ```
 
