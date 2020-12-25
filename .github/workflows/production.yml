@@ -24,11 +24,11 @@ jobs:
 
       - uses: actions/checkout@v2
 
-      - name: Golint Install 
-        run:  go get -u golang.org/x/lint/golint 
-
       - name: Run's Golint 
-        run:  golint
+        run: |
+            export PATH=$PATH:$(go env GOPATH)/bin
+            go get -u golang.org/x/lint/golint
+            golint -set_exit_status 
 
       - name: Install dependencies
         run: go get -u 
