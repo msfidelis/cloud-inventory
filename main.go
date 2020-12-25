@@ -16,24 +16,25 @@ import (
 	"github.com/aws/aws-sdk-go/service/resourcegroupstaggingapi"
 )
 
+// A Resource to export on reports
 type Resource struct {
-	Name    string
-	Arn     string
-	Region  string
-	Service string
+	Name    string // resource name - this value come from tag:Name
+	Arn     string // resource ARN
+	Region  string // resource Region
+	Service string // resource Service. This is parsed by aws/arn
 }
 
 func main() {
-	tag_name := flag.String("tag-name", "", "Tag to search")
-	tag_value := flag.String("tag-value", "", "Tag to search")
+	tagName := flag.String("tag-name", "", "Tag to search")
+	tagValue := flag.String("tag-value", "", "Tag to search")
 	region := flag.String("region", "us-east-1", "Region to search inventory; default: us-east-1")
-	resource_type := flag.String("resource", "", "Optional resource type; ex: ec2, s3, acm")
-	output_format := flag.String("output", "default", "Output report type; ex: default, arn, csv")
+	resourceType := flag.String("resource", "", "Optional resource type; ex: ec2, s3, acm")
+	outputFormat := flag.String("output", "default", "Output report type; ex: default, arn, csv")
 	flag.Parse()
 
-	resources := getResources(*tag_name, *tag_value, *region, *resource_type)
+	resources := getResources(*tagName, *tagValue, *region, *resourceType)
 
-	output := createOutput(resources, *output_format)
+	output := createOutput(resources, *outputFormat)
 
 	fmt.Println(output)
 
@@ -41,11 +42,11 @@ func main() {
 
 }
 
-func getResources(tag_key string, tag_value string, region string, resource_type string) map[string]Resource {
+func getResources(tagKey string, tagValue string, region string, resourceType string) map[string]Resource {
 
-	fmt.Printf("\nSearching for resources using Tag %v:%v\n\n", tag_key, tag_value)
+	fmt.Printf("\nSearching for resources using Tag %v:%v\n\n", tagKey, tagValue)
 
-	cloud_resources := make(map[string]Resource)
+	cloudResources := make(map[string]Resource)
 	items := int64(100)
 	sess, err := getAWSSession(region)
 
@@ -61,8 +62,8 @@ func getResources(tag_key string, tag_value string, region string, resource_type
 	for {
 
 		tagFilters := &resourcegroupstaggingapi.TagFilter{}
-		tagFilters.Key = aws.String(tag_key)
-		tagFilters.Values = append(tagFilters.Values, aws.String(tag_value))
+		tagFilters.Key = aws.String(tagKey)
+		tagFilters.Values = append(tagFilters.Values, aws.String(tagValue))
 
 		getResourcesInput := &resourcegroupstaggingapi.GetResourcesInput{}
 		getResourcesInput.TagFilters = append(getResourcesInput.TagFilters, tagFilters)
@@ -70,9 +71,9 @@ func getResources(tag_key string, tag_value string, region string, resource_type
 		getResourcesInput.ResourcesPerPage = &items
 		getResourcesInput.PaginationToken = token
 
-		if resource_type != "" {
+		if resourceType != "" {
 			getResourcesInput.ResourceTypeFilters = []*string{
-				aws.String(resource_type),
+				aws.String(resourceType),
 			}
 		}
 
@@ -88,7 +89,7 @@ func getResources(tag_key string, tag_value string, region string, resource_type
 
 			arnInfos, _ := arn.Parse(arnLong)
 
-			cloud_resources[arnLong] = Resource{
+			cloudResources[arnLong] = Resource{
 				Name:    name,
 				Arn:     arnLong,
 				Region:  region,
@@ -104,7 +105,7 @@ func getResources(tag_key string, tag_value string, region string, resource_type
 		}
 	}
 
-	return cloud_resources
+	return cloudResources
 
 }
 
