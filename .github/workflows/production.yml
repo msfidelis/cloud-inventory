@@ -19,7 +19,7 @@ jobs:
       - uses: actions/checkout@v2
 
       - name: Golint Install 
-        run:  go get -u golang.org/x/lint/golint && golint
+        run:  go get -u golang.org/x/lint/golint && bash && golint
 
       - name: Install dependencies
         run: go get -u 
