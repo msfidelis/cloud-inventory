@@ -24,7 +24,7 @@ jobs:
       - name: Install dependencies
         run: go get -u 
 
-      - name: Install dependencies
+      - name: Run golint
         run: golint
 
       - name: Test
