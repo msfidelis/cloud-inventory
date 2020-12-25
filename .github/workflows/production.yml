@@ -16,16 +16,15 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
 
-      - uses: actions/checkout@v1
-
-      - name: Install golint
-        run: go get -u golang.org/x/lint/golint
+      - uses: actions/checkout@v2
+      
+      - name: Golint
+        uses: golangci/golangci-lint-action@v2
+        with:
+          version: v1.29
 
       - name: Install dependencies
         run: go get -u 
-
-      - name: Run golint
-        run: golint
 
       - name: Test
         run: go test -v
