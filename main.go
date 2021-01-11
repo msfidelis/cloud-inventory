@@ -4,6 +4,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"regexp"
 	"strings"
 
 	"github.com/ryanuber/columnize"
@@ -30,9 +31,11 @@ func main() {
 	region := flag.String("region", "us-east-1", "Region to search inventory; default: us-east-1")
 	resourceType := flag.String("resource", "", "Optional resource type; ex: ec2, s3, acm")
 	outputFormat := flag.String("output", "default", "Output report type; ex: default, arn, csv")
+	pipeGrep := flag.String("grep", "", "String pattern to search on Tag:Name and ARN resource")
+
 	flag.Parse()
 
-	resources := getResources(*tagName, *tagValue, *region, *resourceType)
+	resources := getResources(*tagName, *tagValue, *region, *resourceType, *pipeGrep)
 
 	output := createOutput(resources, *outputFormat)
 
@@ -42,11 +45,13 @@ func main() {
 
 }
 
-func getResources(tagKey string, tagValue string, region string, resourceType string) map[string]Resource {
+func getResources(tagKey string, tagValue string, region string, resourceType string, stringPattern string) map[string]Resource {
 
 	fmt.Printf("\nSearching for resources using Tag %v:%v\n\n", tagKey, tagValue)
 
 	cloudResources := make(map[string]Resource)
+	cloudResourcesFiltered := make(map[string]Resource)
+
 	items := int64(100)
 	sess, err := getAWSSession(region)
 
@@ -105,7 +110,16 @@ func getResources(tagKey string, tagValue string, region string, resourceType st
 		}
 	}
 
-	return cloudResources
+	// Return cloud resources if not string pattern is set
+	if stringPattern == "" {
+		return cloudResources
+	}
+
+	// Filter string pattern
+
+	cloudResourcesFiltered = filterResources(cloudResources, stringPattern)
+
+	return cloudResourcesFiltered
 
 }
 
@@ -146,7 +160,6 @@ func createOutput(items map[string]Resource, format string) string {
 	}
 
 	return output
-
 }
 
 func createDefaultOutput(items map[string]Resource) string {
@@ -209,4 +222,37 @@ func createCsvOutput(items map[string]Resource) string {
 	}
 
 	return "Output file: results.csv"
+}
+
+func filterResources(resources map[string]Resource, pattern string) map[string]Resource {
+
+	var filtered = make(map[string]Resource)
+
+	if pattern == "" {
+		return resources
+	}
+
+	fmt.Printf("Grepping by %s pattern on resources\n\n", pattern)
+
+	for arn, resource := range resources {
+
+		matchArn, err := regexp.MatchString(pattern, resource.Arn)
+
+		if err != nil {
+			fmt.Errorf("Error to parsing regex on ARN %v", err)
+		}
+
+		matchArnName, err := regexp.MatchString(pattern, resource.Name)
+
+		if err != nil {
+			fmt.Errorf("Error to parsing regex on Tag:Name %v", err)
+		}
+
+		if matchArn == true || matchArnName == true {
+			filtered[arn] = resource
+		}
+	}
+
+	return filtered
+
 }
