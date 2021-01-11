@@ -1,6 +1,6 @@
 <h1 align="left">Welcome to Cloud Inventory Tags 👋</h1>
 <p>
-  <img alt="Version" src="https://img.shields.io/badge/version-v0.0.5-blue.svg?cacheSeconds=2592000" />
+  <img alt="Version" src="https://img.shields.io/badge/version-v0.0.6-blue.svg?cacheSeconds=2592000" />
   <a href="LICENSE " target="_blank">
     <img alt="License: MIT" src="https://img.shields.io/badge/License-MIT-yellow.svg" />
   </a>
@@ -22,14 +22,14 @@
 ### MacOS / OSX
 
 ```bash
-wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.5/cloud-inventory_0.0.5_darwin_amd64 -O /usr/local/bin/cloud-inventory
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.6/cloud-inventory_0.0.6_darwin_amd64 -O /usr/local/bin/cloud-inventory
 chmod +x /usr/local/bin/cloud-inventory
 ```
 
 ### Linux 
 
 ```bash
-wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.5/cloud-inventory_0.0.5_linux_amd64 -O /usr/local/bin/cloud-inventory
+wget https://github.com/msfidelis/cloud-inventory/releases/download/v0.0.6/cloud-inventory_0.0.6_linux_amd64 -O /usr/local/bin/cloud-inventory
 chmod +x /usr/local/bin/cloud-inventory
 ```
 
@@ -121,6 +121,43 @@ Tag:Name            ARN                                                         
 k8s-with-cri-o-vpc  arn:aws:ec2:us-east-1:181560427716:vpc/vpc-0811ba78ad39174e2  us-east-1  ec2
 
 Found 1 resources
+```
+
+## Grepping Resources Patterns
+
+Parameter `--grep` can filter `ARN` and `Tag:Name` string patter 
+
+```sh 
+cloud-inventory --tag-name Project --tag-value k8s-with-cri-o --grep "k8s-node"
+
+Searching for resources using Tag Project:k8s-with-cri-o
+
+Grepping by k8s-node pattern on resources
+
+Tag:Name    ARN                                                              Region     Service
+k8s-node-3  arn:aws:ec2:us-east-1:181560427716:instance/i-03ac47564b5cd5305  us-east-1  ec2
+k8s-node-2  arn:aws:ec2:us-east-1:181560427716:instance/i-0e8d6b9c80bba16c4  us-east-1  ec2
+k8s-node-1  arn:aws:ec2:us-east-1:181560427716:instance/i-0b18f56848fc957b7  us-east-1  ec2
+k8s-node-0  arn:aws:ec2:us-east-1:181560427716:instance/i-06cb80dd7b8d2c7a3  us-east-1  ec2
+
+Found 4 resources
+```
+
+```sh
+cloud-inventory --tag-name Project --tag-value k8s-with-cri-o --grep "k8s-with-*"
+
+Searching for resources using Tag Project:k8s-with-cri-o
+
+Grepping by k8s-with-* pattern on resources
+
+Tag:Name                          ARN                                                                     Region     Service
+k8s-with-cri-o-vpc                arn:aws:ec2:us-east-1:181560427716:vpc/vpc-0b1aec96130d6a672            us-east-1  ec2
+k8s-with-cri-o-kubernetes-sg      arn:aws:ec2:us-east-1:181560427716:security-group/sg-0fdd9aac57dc3b190  us-east-1  ec2
+k8s-with-cri-o-public-us-east-1a  arn:aws:ec2:us-east-1:181560427716:subnet/subnet-0a750924d23dbc6b0      us-east-1  ec2
+k8s-with-cri-o-public-us-east-1b  arn:aws:ec2:us-east-1:181560427716:subnet/subnet-0f11a62247f22d2db      us-east-1  ec2
+k8s-with-cri-o-kubernetes-sg      arn:aws:ec2:us-east-1:181560427716:security-group/sg-061c28ddc1ae6144a  us-east-1  ec2
+
+Found 5 resources
 ```
 
 ## Customize output format 
