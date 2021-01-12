@@ -38,6 +38,9 @@ chmod +x /usr/local/bin/cloud-inventory
 ```sh
 cloud-inventory -h
 
+Usage of cloud-inventory:
+  -grep string
+    	String pattern to search on Tag:Name and ARN resource
   -output string
     	Output report type; ex: default, arn, csv (default "default")
   -region string
