@@ -9,10 +9,11 @@ builds:
       - windows
       - darwin
       - linux
-      - freebsd
+      - freebsd 
     goarch:
       - amd64
       - arm64
+      - arm
 
 # brews:
 #   - github:
